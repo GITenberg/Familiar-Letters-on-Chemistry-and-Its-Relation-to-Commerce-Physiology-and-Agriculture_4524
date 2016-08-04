@@ -1,0 +1,33 @@
+_repo: Familiar-Letters-on-Chemistry-and-Its-Relation-to-Commerce-Physiology-and-Agriculture_4524
+_version: 0.0.1
+creator:
+  author:
+    agent_name: Liebig, Justus, Freiherr von
+    alias: Von Liebig, Justus, Freiherr
+    birthdate: 1803
+    deathdate: 1873
+    gutenberg_agent_id: '1492'
+    url: http://www.gutenberg.org/2009/agents/1492
+  editor:
+    agent_name: Gardner, John
+    birthdate: 1804
+    deathdate: 1880
+    gutenberg_agent_id: '1499'
+    url: http://www.gutenberg.org/2009/agents/1499
+description: ''
+gutenberg_bookshelf: Chemistry
+gutenberg_issued: '2003-10-01'
+gutenberg_type: Text
+identifiers:
+  gutenberg: '4524'
+language: en
+publisher: Project Gutenberg
+rights: Public domain in the USA.
+rights_url: http://creativecommons.org/about/pdm
+subjects:
+- !lcc 'QD'
+- !lcsh 'Chemistry'
+- GITenberg
+title: Familiar Letters on Chemistry, and Its Relation to Commerce, Physiology, and
+  Agriculture
+url: http://www.gutenberg.org/ebooks/4524
