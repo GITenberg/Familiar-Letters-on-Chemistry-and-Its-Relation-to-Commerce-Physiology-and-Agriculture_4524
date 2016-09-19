@@ -1,0 +1,61 @@
+sudo: required
+dist: trusty
+language: ruby
+
+before_install:
+before_install:
+- gem install asciidoctor -v 1.5.2
+- gem install tilt
+- sudo pip install git+https://github.com/gitenberg-dev/gitberg
+- sudo pip install pillow
+- sudo pip install cssutils
+- sudo pip install docutils
+- sudo pip install roman
+- sudo pip install git+https://github.com/gitenberg-dev/pg-epubmaker
+script:
+- VERSION=`ruby -e "require 'yaml'; meta = YAML.load_file('metadata.yaml'); puts meta['_version'];"`
+- git clone https://github.com/gitenberg-dev/asciidoctor-htmlbook.git
+- sudo pip install -r asciidoctor-htmlbook/gitberg-machine/requirements.txt
+
+- /usr/bin/python -c "from gitenberg import travis; travis.build_epub()"
+- ebook-convert book.epub book.mobi
+- xvfb-run ebook-convert book.epub book.pdf
+branches:
+  only:
+  - master
+notifications:
+  webhooks:
+    urls:
+      - https://unglue.it/api/travisci/webhook
+    on_success: always
+    on_failure: never
+    on_start: never
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: djAflpIb1Df+ly1V/uyfr2Au4osPs6knVZfVfuU2k523PldhzFbinU40ZzxYnPORu3s5lv7H3PTusRBKcyn2ONsSmRv0ZJiUKJC1m5JNyaHxBZEYxfnIkXgVaMN1rvqDNjoQ5+UZACLnBAQsDI3sQpTaMWRsBO6XSovsJ36Z4DNPoxku6xMSLpgawlEodQo/3RIT2a5t9TvvQBY2HkoOXh8pthhCkozUeVTCgRhHsx49fJ24XmZXe6hBrxiMnB0WiDYYy9X8VpL2J4fxqvwS6Ar7MN70efWv6GS9HGZB5AWGEYJnfTg2ntxfHzdk2Tz/iopQjrai16LH2KVCP428R6Vq3QrRGRy1hkZwKxsWfVp6KxMyLP9p2TdtFku2F1D9SxBJnCd6BqR/QS0KZwiHSfIzl9jtHmSXWsqslNDedA9umGT2Ak2FUYk8qXfiwnyf8vlHdCPaIfZ4CcYUE+CMax0WGsuo7ycpqIkyZlBJRH5+KgWf1lsCbdOb0P+zY3Zs9NgY/lPHY/7TR0YcIHYSCSwSsqBAfF84Qs0uVC6D00iiEH2MDnQWpi7furddwxTYKcIpCfXF5mw44RHaiD8iym65cy4YRTbAQBWq3pC3Y3f54RNXipD1N6dn01OGHv/QceJGwaEYs+Dox3VSYZZ4BX1w3Iz80jBg/RZKQU2Jjbc=
+  file:
+    - book.epub
+    - book.mobi
+    - book.pdf
+  "on":
+    repo: GITenberg/Familiar-Letters-on-Chemistry-and-Its-Relation-to-Commerce-Physiology-and-Agriculture_4524
+addons:
+  apt:
+    packages:
+    - xsltproc
+    - xvfb
+    - calibre
+    - python-pip
+    - git
+    - python-dev
+    - libjpeg-dev
+    - libpng-dev
+    - libfreetype6
+    - libfreetype6-dev
+    - zlib1g-dev
+    - python-lxml
+    - libxml2-dev
+    - libxslt1-dev
+    - tidy
